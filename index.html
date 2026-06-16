@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Restablecimiento y caja base */
+        /* Reset básico */
         *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
@@ -18,7 +18,7 @@
         }
 
         body {
-            background-color: #ff0000; /* Fondo Rojo Puro solicitado */
+            background-color: #ff0000; /* Fondo Rojo Puro */
             color: #FFFFFF;
             font-family: 'Montserrat', sans-serif;
             min-height: 100vh;
@@ -28,7 +28,6 @@
             justify-content: space-between;
         }
 
-        /* Contenedor Grid Responsivo Principal */
         .container {
             max-width: 1300px;
             margin: 0 auto;
@@ -38,7 +37,6 @@
             gap: 40px;
         }
 
-        /* Cambio de distribución en pantallas de escritorio (Desktop) */
         @media (min-width: 992px) {
             .container {
                 grid-template-columns: 1.2fr 1fr; 
@@ -47,7 +45,6 @@
             }
         }
 
-        /* COLUMNA IZQUIERDA: Cabecera y Título Principal */
         .header-section {
             display: flex;
             flex-direction: column;
@@ -72,7 +69,6 @@
             word-wrap: break-word;
         }
 
-        /* COLUMNA DERECHA: Bloques de contenido */
         .content-section {
             border-top: 2px solid #FFFFFF; 
             padding-top: 32px;
@@ -99,13 +95,11 @@
             text-align: justify;
         }
 
-        /* ==========================================
-           NUEVO COMPONENTE: REPRODUCTOR DE CD INTERACTIVO 
-           ========================================== */
+        /* REPRODUCTOR DE CD */
         .cd-player-container {
             max-width: 400px;
             margin: 40px auto 10px auto;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             border: 2px solid #FFFFFF;
             padding: 24px;
             text-align: center;
@@ -114,7 +108,7 @@
 
         @media (min-width: 992px) {
             .cd-player-container {
-                margin: 40px 0 10px auto; /* Lo alinea a la derecha en pantallas grandes */
+                margin: 40px 0 10px auto;
             }
         }
 
@@ -128,7 +122,6 @@
             padding-bottom: 8px;
         }
 
-        /* Estructura física del CD */
         .cd-disc {
             width: 200px;
             height: 200px;
@@ -136,28 +129,25 @@
             border-radius: 50%;
             border: 2px solid #FFFFFF;
             position: relative;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            box-shadow: 0 0 15px rgba(0,0,0,0.6);
             overflow: hidden;
-            background-color: #111;
-            /* Transición suave para detener el giro */
+            /* Fondo de CD/Vinilo negro en caso de que "luchacd.jpg" falle */
+            background: radial-gradient(circle, #222 30%, #050505 60%, #1a1a1a 100%);
             animation: spin 4s linear infinite;
             animation-play-state: paused; 
         }
 
-        /* Clase dinámica controlada por JavaScript para hacer girar el CD */
         .cd-disc.playing {
             animation-play-state: running;
         }
 
-        /* Imagen de portada "LUCHACD" dentro del disco */
         .cd-cover {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.85;
+            display: block;
         }
 
-        /* Centro del CD (El agujero plástico típico de un disco compacto) */
         .cd-center-hole {
             position: absolute;
             top: 50%;
@@ -165,20 +155,17 @@
             transform: translate(-50%, -50%);
             width: 45px;
             height: 45px;
-            background-color: #ff0000; /* Toma el color de fondo */
+            background-color: #ff0000; 
             border: 4px solid #FFFFFF;
             border-radius: 50%;
             z-index: 3;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
         }
 
-        /* Animación de rotación */
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        /* Controles de reproducción */
         .cd-controls {
             display: flex;
             align-items: center;
@@ -205,7 +192,6 @@
             color: #ff0000;
         }
 
-        /* Control de Volumen */
         .volume-container {
             display: flex;
             align-items: center;
@@ -239,7 +225,7 @@
             border-radius: 50%;
         }
 
-        /* SECCIÓN DE LA GALERÍA EN ESTILO GRID */
+        /* GALERÍA EN GRID */
         .gallery-grid {
             max-width: 1300px;
             width: 100%;
@@ -262,21 +248,28 @@
             position: relative;
             height: 250px;
             border: 2px solid #FFFFFF;
-            background-color: rgba(255, 255, 255, 0.05);
+            /* Fondo gris oscuro por si la imagen de la galería no carga */
+            background-color: #222222; 
             overflow: hidden;
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
         .gallery-item:hover {
             transform: translateY(-5px);
-            background-color: rgba(255, 255, 255, 0.15);
+            background-color: #333333;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover; 
+            display: block;
             transition: transform 0.4s ease;
+        }
+
+        /* Si la imagen no carga, este estilo ayuda a centrar el texto alternativo */
+        .gallery-item img:not([src]) {
+            display: none;
         }
 
         .gallery-item:hover img {
@@ -326,7 +319,7 @@
                 
                 <div class="cd-disc" id="cdDisc">
                     <div class="cd-center-hole"></div>
-                    <img src="luchacd.jpg" alt="Portada LUCHACD" class="cd-cover">
+                    <img src="luchacd.jpg" alt="" class="cd-cover" onerror="this.style.display='none'">
                 </div>
 
                 <div class="cd-controls">
@@ -348,12 +341,12 @@
     <section class="gallery-grid">
         
         <a href="https://www.instagram.com/everybody.hates.clara/" target="_blank" rel="noopener" class="gallery-item">
-            <img src="grafico1.jpg" alt="Gráfico 1">
+            <img src="grafico1.jpg" alt="grafico 1">
             <div class="art-label">grafico 1</div>
         </a>
 
         <a href="https://x.com/ChiliClara" target="_blank" rel="noopener" class="gallery-item">
-            <img src="escorpion2.png" alt="Escorpión 2">
+            <img src="escorpion2.png" alt="escorpion2">
             <div class="art-label">escorpion2</div>
         </a>
 
@@ -371,39 +364,34 @@
         const volumeSlider = document.getElementById('volumeSlider');
         const cdDisc = document.getElementById('cdDisc');
 
-        // Establecer volumen inicial del slider
         audio.volume = volumeSlider.value;
 
-        // Acción del Botón Play / Pausa
         playBtn.addEventListener('click', () => {
             if (audio.paused) {
-                audio.play();
+                audio.play().catch(err => console.log("Falta archivo de audio local: OCTUBRE22.mp3"));
                 playBtn.textContent = 'Pause';
-                cdDisc.classList.add('playing'); // Inicia animación de giro del CD
+                cdDisc.style.animationPlayState = 'running';
             } else {
                 audio.pause();
                 playBtn.textContent = 'Play';
-                cdDisc.classList.remove('playing'); // Pausa el giro del CD
+                cdDisc.style.animationPlayState = 'paused';
             }
         });
 
-        // Acción del Botón Stop (Detiene la música y regresa al segundo 0)
         stopBtn.addEventListener('click', () => {
             audio.pause();
             audio.currentTime = 0;
             playBtn.textContent = 'Play';
-            cdDisc.classList.remove('playing'); // Detiene el giro por completo
+            cdDisc.style.animationPlayState = 'paused';
         });
 
-        // Control de Volumen en tiempo real
         volumeSlider.addEventListener('input', (e) => {
             audio.volume = e.target.value;
         });
 
-        // Detectar si la canción termina sola para reiniciar el estado del CD
         audio.addEventListener('ended', () => {
             playBtn.textContent = 'Play';
-            cdDisc.classList.remove('playing');
+            cdDisc.style.animationPlayState = 'paused';
         });
     </script>
 
