@@ -18,7 +18,7 @@
         }
 
         body {
-            background-color: #ff0000; /* Fondo Rojo Puro */
+            background-color: #ff0000; /* Fondo Rojo Puro en la parte inferior */
             color: #FFFFFF;
             font-family: 'Montserrat', sans-serif;
             min-height: 100vh;
@@ -27,23 +27,16 @@
             overflow-x: hidden;
         }
 
-        /* FONDO DIVIDIDO: VIDEO EN LA SECCIÓN SUPERIOR AMPLITUD 78% */
-        .video-bg-container {
+        /* FONDO SÓLIDO EN LA SECCIÓN SUPERIOR AL 78% (Reemplaza al video) */
+        .solid-bg-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 78vh;
-            overflow: hidden;
+            background-color: #000000; /* Negro Puro Punk */
             z-index: -2;
-            background-color: #000;
-        }
-
-        .video-bg-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.45; 
+            border-bottom: 3px solid #FFFFFF;
         }
 
         /* LÍNEA DIVISORIA MARQUESINA */
@@ -213,11 +206,14 @@
         .alto-video-container {
             max-width: 180px;
             width: 100%;
+            min-height: 240px; /* Asegura espacio si tarda en cargar */
             box-shadow: 6px 6px 0px #000;
             border: 3px solid #ffffff;
             background-color: #000;
             transform: rotate(-4deg);
             overflow: hidden;
+            display: flex;
+            align-items: center;
         }
 
         .alto-video-container video {
@@ -392,10 +388,4 @@
             border: 1px solid #000;
         }
 
-        /* STICKERS INTERACTIVOS Y ARRASTRABLES (CON ARCHIVOS .PNG) */
-        .draggable-sticker {
-            position: absolute;
-            z-index: 99;
-            cursor: move;
-            user-select: none;
-            touch-action: none;
+        /* STICKERS INTERACTIVOS Y ARRASTRABLES */
