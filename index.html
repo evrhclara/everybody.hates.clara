@@ -18,7 +18,7 @@
         }
 
         body {
-            background-color: #FF2E00; /* Rojo puro/vibrante idéntico al de la imagen */
+            background-color: #ff0000; /* Fondo Rojo Puro solicitado */
             color: #FFFFFF;
             font-family: 'Montserrat', sans-serif;
             min-height: 100vh;
@@ -28,7 +28,7 @@
             justify-content: space-between;
         }
 
-        /* Contenedor Grid Responsivo */
+        /* Contenedor Grid Responsivo Principal */
         .container {
             max-width: 1300px;
             margin: 0 auto;
@@ -41,7 +41,7 @@
         /* Cambio de distribución en pantallas de escritorio (Desktop) */
         @media (min-width: 992px) {
             .container {
-                grid-template-columns: 1.2fr 1fr; /* Dos columnas asimétricas */
+                grid-template-columns: 1.2fr 1fr; 
                 gap: 80px;
                 align-items: start;
             }
@@ -65,7 +65,7 @@
 
         .main-title {
             font-family: 'Archivo Black', sans-serif;
-            font-size: clamp(3.2rem, 7.5vw, 6.5rem); /* Tipografía fluida gigante */
+            font-size: clamp(3.2rem, 7.5vw, 6.5rem); 
             line-height: 0.85;
             text-transform: uppercase;
             letter-spacing: -2px;
@@ -74,7 +74,7 @@
 
         /* COLUMNA DERECHA: Bloques de contenido */
         .content-section {
-            border-top: 2px solid #FFFFFF; /* Línea separadora superior en móviles */
+            border-top: 2px solid #FFFFFF; 
             padding-top: 32px;
             display: flex;
             flex-direction: column;
@@ -84,7 +84,7 @@
         @media (min-width: 992px) {
             .content-section {
                 border-top: none;
-                border-left: 2px solid #FFFFFF; /* Línea separadora vertical en escritorio */
+                border-left: 2px solid #FFFFFF; 
                 padding-top: 0;
                 padding-left: 48px;
             }
@@ -93,47 +93,208 @@
         .paragraph {
             font-size: clamp(0.85rem, 1.2vw, 1rem);
             line-height: 1.45;
-            text-transform: uppercase; /* Forzar texto en mayúsculas idéntico al diseño */
+            text-transform: uppercase; 
             font-weight: 500;
             letter-spacing: 0.3px;
             text-align: justify;
         }
 
-        /* COMPONENTE INFERIOR: Espacio reservado para el arte gráfico */
-        .graphic-art-container {
-            max-width: 1300px;
+        /* ==========================================
+           NUEVO COMPONENTE: REPRODUCTOR DE CD INTERACTIVO 
+           ========================================== */
+        .cd-player-container {
+            max-width: 400px;
+            margin: 40px auto 10px auto;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid #FFFFFF;
+            padding: 24px;
+            text-align: center;
             width: 100%;
-            margin: 48px auto 0 auto;
+        }
+
+        @media (min-width: 992px) {
+            .cd-player-container {
+                margin: 40px 0 10px auto; /* Lo alinea a la derecha en pantallas grandes */
+            }
+        }
+
+        .cd-song-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            border-bottom: 1px dashed #FFFFFF;
+            padding-bottom: 8px;
+        }
+
+        /* Estructura física del CD */
+        .cd-disc {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px auto;
+            border-radius: 50%;
+            border: 2px solid #FFFFFF;
             position: relative;
-            min-height: 200px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            overflow: hidden;
+            background-color: #111;
+            /* Transición suave para detener el giro */
+            animation: spin 4s linear infinite;
+            animation-play-state: paused; 
+        }
+
+        /* Clase dinámica controlada por JavaScript para hacer girar el CD */
+        .cd-disc.playing {
+            animation-play-state: running;
+        }
+
+        /* Imagen de portada "LUCHACD" dentro del disco */
+        .cd-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+        }
+
+        /* Centro del CD (El agujero plástico típico de un disco compacto) */
+        .cd-center-hole {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 45px;
+            height: 45px;
+            background-color: #ff0000; /* Toma el color de fondo */
+            border: 4px solid #FFFFFF;
+            border-radius: 50%;
+            z-index: 3;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+        }
+
+        /* Animación de rotación */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Controles de reproducción */
+        .cd-controls {
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px dashed rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.03);
-            overflow: hidden;
+            gap: 15px;
+            margin-bottom: 16px;
         }
 
-        /* SVG decorativo lineal simulando las espinas y destellos celestes */
-        .fallback-svg {
-            position: absolute;
+        .btn-control {
+            background: transparent;
+            border: 2px solid #FFFFFF;
+            color: #FFFFFF;
+            padding: 8px 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn-control:hover {
+            background-color: #FFFFFF;
+            color: #ff0000;
+        }
+
+        /* Control de Volumen */
+        .volume-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .volume-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 120px;
+            height: 4px;
+            background: #FFFFFF;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #FFFFFF;
+            border: 2px solid #ff0000;
+            border-radius: 50%;
+        }
+
+        /* SECCIÓN DE LA GALERÍA EN ESTILO GRID */
+        .gallery-grid {
+            max-width: 1300px;
+            width: 100%;
+            margin: 40px auto 0 auto;
+            display: grid;
+            grid-template-columns: 1fr; 
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr); 
+            }
+        }
+
+        .gallery-item {
+            display: block;
+            text-decoration: none;
+            color: #FFFFFF;
+            position: relative;
+            height: 250px;
+            border: 2px solid #FFFFFF;
+            background-color: rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .gallery-item img {
             width: 100%;
             height: 100%;
-            top: 0;
-            left: 0;
-            opacity: 0.85;
-            pointer-events: none;
+            object-fit: cover; 
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05); 
         }
 
         .art-label {
-            position: relative;
-            font-size: 0.75rem;
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            background-color: #FF2E00;
-            padding: 4px 12px;
+            background-color: #ff0000;
+            padding: 4px 10px;
             letter-spacing: 1px;
-            border: 1px solid #FFFFFF;
             font-weight: 700;
+            border: 1px solid #FFFFFF;
+            z-index: 2;
         }
     </style>
 </head>
@@ -159,25 +320,92 @@
             <p class="paragraph">
                 Desde mis inicios hasta el presente, cada paso ha dejado una huella. Te invito a descubrirla.
             </p>
+            
+            <div class="cd-player-container">
+                <div class="cd-song-title">TRACK: OCTUBRE22</div>
+                
+                <div class="cd-disc" id="cdDisc">
+                    <div class="cd-center-hole"></div>
+                    <img src="luchacd.jpg" alt="Portada LUCHACD" class="cd-cover">
+                </div>
+
+                <div class="cd-controls">
+                    <button class="btn-control" id="playBtn">Play</button>
+                    <button class="btn-control" id="stopBtn">Stop</button>
+                </div>
+
+                <div class="volume-container">
+                    <span class="volume-label">VOL</span>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.7">
+                </div>
+
+                <audio id="audioTrack" src="OCTUBRE22.mp3" preload="auto"></audio>
+            </div>
         </main>
 
     </div>
 
-    <div class="graphic-art-container">
-        <svg class="fallback-svg" viewBox="0 0 1200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 160 Q 150 60 350 130 T 700 90 T 1050 140 T 1200 80" stroke="#CBE6EC" stroke-width="2" stroke-linecap="round"/>
-            <path d="M50 120 C 200 40, 400 180, 600 100 C 800 200, 1000 50, 1150 150" stroke="#CBE6EC" stroke-width="1" stroke-dasharray="4,4"/>
-            <g stroke="#CBE6EC" stroke-width="1.5">
-                <line x1="150" y1="60" x2="150" y2="100" /><line x1="130" y1="80" x2="170" y2="80" />
-                <line x1="140" y1="70" x2="160" y2="90" /><line x1="160" y1="70" x2="140" y2="90" />
+    <section class="gallery-grid">
+        
+        <a href="https://www.instagram.com/everybody.hates.clara/" target="_blank" rel="noopener" class="gallery-item">
+            <img src="grafico1.jpg" alt="Gráfico 1">
+            <div class="art-label">grafico 1</div>
+        </a>
 
-                <g transform="translate(600, -20)">
-                    <line x1="150" y1="60" x2="150" y2="100" /><line x1="130" y1="80" x2="170" y2="80" />
-                </g>
-            </g>
-        </svg>
-        <div class="art-label">Tu_Ilustracion_Grafica.png / .webp</div>
-    </div>
+        <a href="https://x.com/ChiliClara" target="_blank" rel="noopener" class="gallery-item">
+            <img src="escorpion2.png" alt="Escorpión 2">
+            <div class="art-label">escorpion2</div>
+        </a>
+
+        <a href="https://readymag.website/5091076" target="_blank" rel="noopener" class="gallery-item">
+            <img src="gfcl1.jpg" alt="GFCL-1">
+            <div class="art-label">GFCL-1</div>
+        </a>
+
+    </section>
+
+    <script>
+        const audio = document.getElementById('audioTrack');
+        const playBtn = document.getElementById('playBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const cdDisc = document.getElementById('cdDisc');
+
+        // Establecer volumen inicial del slider
+        audio.volume = volumeSlider.value;
+
+        // Acción del Botón Play / Pausa
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.textContent = 'Pause';
+                cdDisc.classList.add('playing'); // Inicia animación de giro del CD
+            } else {
+                audio.pause();
+                playBtn.textContent = 'Play';
+                cdDisc.classList.remove('playing'); // Pausa el giro del CD
+            }
+        });
+
+        // Acción del Botón Stop (Detiene la música y regresa al segundo 0)
+        stopBtn.addEventListener('click', () => {
+            audio.pause();
+            audio.currentTime = 0;
+            playBtn.textContent = 'Play';
+            cdDisc.classList.remove('playing'); // Detiene el giro por completo
+        });
+
+        // Control de Volumen en tiempo real
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+
+        // Detectar si la canción termina sola para reiniciar el estado del CD
+        audio.addEventListener('ended', () => {
+            playBtn.textContent = 'Play';
+            cdDisc.classList.remove('playing');
+        });
+    </script>
 
 </body>
 </html>
