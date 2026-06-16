@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Everybody Hates Clara - Landing Page</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
@@ -18,29 +17,39 @@
             padding: 0;
         }
 
-        /* FONDO BASE NEGRO PARA LA SECCIÓN SUPERIOR */
         body {
-            background-color: #000000; 
+            background-color: #ff0000; /* Fondo Rojo Puro */
             color: #FFFFFF;
             font-family: 'Montserrat', sans-serif;
             min-height: 100vh;
+            padding: 40px 24px;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* SECCIÓN INFERIOR ROJA (Contenedor real para las fotos) */
-        .bottom-red-section {
-            background-color: #ff0000; /* Rojo Puro */
+        /* FONDO DIVIDIDO: VIDEO EN LA SECCIÓN SUPERIOR AMPLITUD 78% */
+        .video-bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 120px 24px 80px 24px;
-            position: relative;
-            z-index: 4;
+            height: 78vh;
+            overflow: hidden;
+            z-index: -2;
+            background-color: #000;
+        }
+
+        .video-bg-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.45; 
         }
 
         /* LÍNEA DIVISORIA MARQUESINA */
         .marquee-divider {
             position: absolute;
-            top: 0; /* Se alinea justo al inicio de la sección roja */
+            top: 78vh;
             left: 0;
             width: 100%;
             background-color: #000000;
@@ -51,7 +60,6 @@
             overflow: hidden;
             white-space: nowrap;
             display: flex;
-            transform: translateY(-50%); /* Centrada sobre el corte */
         }
 
         .marquee-text {
@@ -70,12 +78,11 @@
             100% { transform: translate3d(-100%, 0, 0); }
         }
 
-        /* CONTENEDOR PRINCIPAL INTERIOR (SECCIÓN NEGRA) */
-        .top-content-container {
+        /* CONTENEDOR PRINCIPAL */
+        .container {
             max-width: 1300px;
             margin: 0 auto;
             width: 100%;
-            padding: 60px 24px 100px 24px;
             display: grid;
             grid-template-columns: 1fr;
             gap: 40px;
@@ -84,7 +91,7 @@
         }
 
         @media (min-width: 992px) {
-            .top-content-container {
+            .container {
                 grid-template-columns: 1.2fr 1fr; 
                 gap: 80px;
                 align-items: start;
@@ -206,14 +213,11 @@
         .alto-video-container {
             max-width: 180px;
             width: 100%;
-            min-height: 240px;
             box-shadow: 6px 6px 0px #000;
             border: 3px solid #ffffff;
             background-color: #000;
             transform: rotate(-4deg);
             overflow: hidden;
-            display: flex;
-            align-items: center;
         }
 
         .alto-video-container video {
@@ -388,7 +392,7 @@
             border: 1px solid #000;
         }
 
-        /* STICKERS INTERACTIVOS Y ARRASTRABLES */
+        /* STICKERS INTERACTIVOS Y ARRASTRABLES (CON ARCHIVOS .PNG) */
         .draggable-sticker {
             position: absolute;
             z-index: 99;
@@ -396,7 +400,7 @@
             user-select: none;
             touch-action: none;
             display: inline-block;
-            max-width: 90px;
+            max-width: 90px; /* Tamaño equilibrado para los stickers */
             height: auto;
         }
 
@@ -404,7 +408,7 @@
             width: 100%;
             height: auto;
             display: block;
-            pointer-events: none;
+            pointer-events: none; /* Evita que la imagen interfiera con el arrastre nativo */
         }
 
         #sticker1 { top: -25px; left: 10px; transform: rotate(-8deg); }
@@ -412,15 +416,17 @@
         #sticker3 { bottom: -30px; left: 30px; transform: rotate(-5deg); }
         #sticker4 { bottom: 80px; left: -45px; transform: rotate(15deg); }
 
-        /* SECCIÓN DE FOTOS INDEPENDIENTES (POLAROIDS) */
+        /* SECCIÓN DE FOTOS INDEPENDIENTES (ESTILO POLAROID CON CAPTION VACÍO) */
         .independent-photos-container {
             max-width: 1200px;
             width: 100%;
-            margin: 40px auto 0 auto;
+            margin: 180px auto 60px auto;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 40px;
+            position: relative;
+            z-index: 5;
         }
 
         .polaroid-card {
@@ -461,7 +467,6 @@
             display: block;
         }
 
-        /* Espacio en blanco de la polaroid sin texto */
         .polaroid-caption-space {
             margin-top: 24px;
             border-bottom: 2px dashed #e0e0e0;
@@ -471,16 +476,26 @@
 </head>
 <body>
 
-    <!-- BLOQUE SUPERIOR (NEGRO SEGURO) -->
-    <div class="top-content-container">
+    <div class="video-bg-container">
+        <video autoplay muted loop playsinline>
+            <source src="BALLROOM.webm" type="video/webm">
+            <source src="BALLROOM.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="marquee-divider">
+        <div class="marquee-text">
+            quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <div class="container">
         
-        <!-- Izquierda: Títulos -->
         <header class="header-section">
             <p class="subtitle-top">Volcanes y caminos que parecen guardar secretos ahí comenzó mi historia.</p>
             <h1 class="main-title">Everybody<br>Hates<br>Clara</h1>
         </header>
 
-        <!-- Derecha: Acordeones Desplegables Punk -->
         <main class="content-section">
             
             <button class="punk-accordion">01. Orígenes</button>
@@ -511,10 +526,8 @@
                 </p>
             </div>
             
-            <!-- CONTENEDOR MULTIMEDIA -->
             <div class="player-multimedia-wrapper">
                 
-                <!-- STICKERS REMOVIBLES -->
                 <div id="sticker1" class="draggable-sticker">
                     <img src="STICKER1.png" alt="Sticker 1" onerror="this.style.display='none';">
                 </div>
@@ -528,7 +541,6 @@
                     <img src="STICKER4.png" alt="Sticker 4" onerror="this.style.display='none';">
                 </div>
 
-                <!-- REPRODUCTOR CD VINTAGE -->
                 <div class="cd-player-container">
                     <div class="cd-song-title">
                         <span>TRACK: OCTUBRE22</span>
@@ -553,7 +565,6 @@
                     <audio id="audioTrack" src="OCTUBRE22.mp3" preload="auto"></audio>
                 </div>
 
-                <!-- VIDEO ALTO.webm JUNTO AL CD -->
                 <div class="alto-video-container">
                     <video autoplay muted loop playsinline id="altoVideo">
                         <source src="ALTO.webm" type="video/webm">
@@ -565,44 +576,31 @@
 
     </div>
 
-    <!-- BLOQUE INFERIOR (ROJO SEGURO) -->
-    <div class="bottom-red-section">
+    <section class="independent-photos-container">
         
-        <!-- LÍNEA DIVISORIA MARQUESINA -->
-        <div class="marquee-divider">
-            <div class="marquee-text">
-                quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+        <a href="https://www.instagram.com/everybody.hates.clara/" target="_blank" rel="noopener" class="polaroid-card">
+            <div class="polaroid-image-wrapper">
+                <img src="grafico1.jpg" alt="grafico 1">
             </div>
-        </div>
+            <div class="polaroid-caption-space"></div>
+        </a>
 
-        <!-- SECCIÓN DE FOTOS INDEPENDIENTES (POLAROIDS LIMPIAS) -->
-        <section class="independent-photos-container">
-            
-            <a href="https://www.instagram.com/everybody.hates.clara/" target="_blank" rel="noopener" class="polaroid-card">
-                <div class="polaroid-image-wrapper">
-                    <img src="grafico1.jpg" alt="grafico 1">
-                </div>
-                <div class="polaroid-caption-space"></div>
-            </a>
+        <a href="https://x.com/ChiliClara" target="_blank" rel="noopener" class="polaroid-card">
+            <div class="polaroid-image-wrapper">
+                <img src="escorpion2.png" alt="escorpion2">
+            </div>
+            <div class="polaroid-caption-space"></div>
+        </a>
 
-            <a href="https://x.com/ChiliClara" target="_blank" rel="noopener" class="polaroid-card">
-                <div class="polaroid-image-wrapper">
-                    <img src="escorpion2.png" alt="escorpion2">
-                </div>
-                <div class="polaroid-caption-space"></div>
-            </a>
+        <a href="https://readymag.website/5091076" target="_blank" rel="noopener" class="polaroid-card">
+            <div class="polaroid-image-wrapper">
+                <img src="CLARA123.jpg" alt="CLARA123">
+            </div>
+            <div class="polaroid-caption-space"></div>
+        </a>
 
-            <a href="https://readymag.website/5091076" target="_blank" rel="noopener" class="polaroid-card">
-                <div class="polaroid-image-wrapper">
-                    <img src="CLARA123.jpg" alt="CLARA123">
-                </div>
-                <div class="polaroid-caption-space"></div>
-            </a>
+    </section>
 
-        </section>
-    </div>
-
-    <!-- LÓGICA JAVASCRIPT -->
     <script>
         // Lógica Acordeón
         const acc = document.getElementsByClassName("punk-accordion");
