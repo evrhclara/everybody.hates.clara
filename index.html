@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Everybody Hates Clara - Landing Page</title>
     
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
     
     <style>
         /* Reset básico */
@@ -23,11 +24,62 @@
             font-family: 'Montserrat', sans-serif;
             min-height: 100vh;
             padding: 40px 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            position: relative;
+            overflow-x: hidden;
         }
 
+        /* FONDO DIVIDIDO: VIDEO EN LA MITAD SUPERIOR */
+        .video-bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50vh; /* Ocupa exactamente la mitad superior de la pantalla */
+            overflow: hidden;
+            z-index: -2;
+            background-color: #000;
+        }
+
+        .video-bg-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.45; /* Filtro oscuro para no opacar el texto blanco */
+        }
+
+        /* LÍNEA DIVISORIA CON LA FRASE EN MEDIO */
+        .marquee-divider {
+            position: absolute;
+            top: 50vh; /* Justo a la mitad de la página */
+            left: 0;
+            width: 100%;
+            background-color: #000000;
+            border-top: 3px solid #FFFFFF;
+            border-bottom: 3px solid #FFFFFF;
+            padding: 8px 0;
+            z-index: 10;
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+        }
+
+        .marquee-text {
+            display: inline-block;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #FFFFFF;
+            animation: marquee 20s linear infinite;
+            padding-left: 100%;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        /* CONTENEDOR PRINCIPAL */
         .container {
             max-width: 1300px;
             margin: 0 auto;
@@ -35,6 +87,8 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 40px;
+            position: relative;
+            z-index: 5;
         }
 
         @media (min-width: 992px) {
@@ -45,6 +99,7 @@
             }
         }
 
+        /* COLUMNA IZQUIERDA */
         .header-section {
             display: flex;
             flex-direction: column;
@@ -53,11 +108,12 @@
         .subtitle-top {
             font-size: clamp(0.7rem, 1.2vw, 0.85rem);
             text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            font-weight: 900;
+            letter-spacing: 1px;
             margin-bottom: 24px;
             line-height: 1.3;
             max-width: 550px;
+            text-shadow: 2px 2px 0px #000;
         }
 
         .main-title {
@@ -67,30 +123,71 @@
             text-transform: uppercase;
             letter-spacing: -2px;
             word-wrap: break-word;
+            text-shadow: 4px 4px 0px #000;
         }
 
+        /* COLUMNA DERECHA: BARRAS PUNK DESPLEGABLES */
         .content-section {
-            border-top: 2px solid #FFFFFF; 
-            padding-top: 32px;
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 16px;
+            margin-top: 20px;
         }
 
-        @media (min-width: 992px) {
-            .content-section {
-                border-top: none;
-                border-left: 2px solid #FFFFFF; 
-                padding-top: 0;
-                padding-left: 48px;
-            }
+        /* Barra picuda estilo fanzine/punk */
+        .punk-accordion {
+            background-color: #000000;
+            color: #FFFFFF;
+            border: 3px solid #FFFFFF;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            padding: 14px 20px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            position: relative;
+            outline: none;
+            transition: background-color 0.2s;
+            /* Bordes picudos asimétricos estilo punk */
+            clip-path: polygon(0% 0%, 96% 0%, 100% 30%, 98% 75%, 100% 100%, 4% 100%, 0% 80%);
+        }
+
+        .punk-accordion:hover {
+            background-color: #ff0000;
+            color: #000000;
+            border-color: #000000;
+        }
+
+        /* Flecha indicadora */
+        .punk-accordion::after {
+            content: ' ✚';
+            font-size: 0.9rem;
+            float: right;
+        }
+
+        .punk-accordion.active::after {
+            content: ' ✖';
+        }
+
+        /* Panel oculto que guarda el texto */
+        .punk-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #000000;
+            border-left: 4px solid #000000;
+            border-right: 4px solid #000000;
+            margin-bottom: 10px;
         }
 
         .paragraph {
+            padding: 18px;
             font-size: clamp(0.85rem, 1.2vw, 1rem);
-            line-height: 1.45;
+            line-height: 1.5;
             text-transform: uppercase; 
-            font-weight: 500;
+            font-weight: 700;
             letter-spacing: 0.3px;
             text-align: justify;
         }
@@ -99,11 +196,12 @@
         .cd-player-container {
             max-width: 400px;
             margin: 40px auto 10px auto;
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid #FFFFFF;
+            background: #000000;
+            border: 3px solid #FFFFFF;
             padding: 24px;
             text-align: center;
             width: 100%;
+            box-shadow: 7px 7px 0px #000;
         }
 
         @media (min-width: 992px) {
@@ -114,25 +212,23 @@
 
         .cd-song-title {
             font-size: 0.9rem;
-            font-weight: 700;
+            font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 16px;
-            border-bottom: 1px dashed #FFFFFF;
+            border-bottom: 2px dashed #FFFFFF;
             padding-bottom: 8px;
         }
 
         .cd-disc {
-            width: 200px;
-            height: 200px;
+            width: 180px;
+            height: 180px;
             margin: 0 auto 20px auto;
             border-radius: 50%;
-            border: 2px solid #FFFFFF;
+            border: 3px solid #FFFFFF;
             position: relative;
-            box-shadow: 0 0 15px rgba(0,0,0,0.6);
             overflow: hidden;
-            /* Fondo de CD/Vinilo negro en caso de que "luchacd.jpg" falle */
-            background: radial-gradient(circle, #222 30%, #050505 60%, #1a1a1a 100%);
+            background: radial-gradient(circle, #333 30%, #050505 60%, #222 100%);
             animation: spin 4s linear infinite;
             animation-play-state: paused; 
         }
@@ -155,7 +251,7 @@
             transform: translate(-50%, -50%);
             width: 45px;
             height: 45px;
-            background-color: #ff0000; 
+            background-color: #000000; 
             border: 4px solid #FFFFFF;
             border-radius: 50%;
             z-index: 3;
@@ -176,11 +272,10 @@
 
         .btn-control {
             background: transparent;
-            border: 2px solid #FFFFFF;
+            border: 3px solid #FFFFFF;
             color: #FFFFFF;
             padding: 8px 16px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
+            font-family: 'Archivo Black', sans-serif;
             font-size: 0.8rem;
             text-transform: uppercase;
             cursor: pointer;
@@ -189,27 +284,26 @@
 
         .btn-control:hover {
             background-color: #FFFFFF;
-            color: #ff0000;
+            color: #000000;
         }
 
         .volume-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .volume-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-family: 'Archivo Black', sans-serif;
         }
 
         .volume-slider {
             -webkit-appearance: none;
             appearance: none;
             width: 120px;
-            height: 4px;
+            height: 6px;
             background: #FFFFFF;
             outline: none;
             cursor: pointer;
@@ -218,21 +312,22 @@
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 12px;
-            height: 12px;
-            background: #FFFFFF;
-            border: 2px solid #ff0000;
-            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            background: #ff0000;
+            border: 2px solid #FFFFFF;
         }
 
         /* GALERÍA EN GRID */
         .gallery-grid {
             max-width: 1300px;
             width: 100%;
-            margin: 40px auto 0 auto;
+            margin: 120px auto 0 auto; /* Espaciado con respecto a la línea central */
             display: grid;
             grid-template-columns: 1fr; 
             gap: 20px;
+            position: relative;
+            z-index: 5;
         }
 
         @media (min-width: 768px) {
@@ -247,16 +342,16 @@
             color: #FFFFFF;
             position: relative;
             height: 250px;
-            border: 2px solid #FFFFFF;
-            /* Fondo gris oscuro por si la imagen de la galería no carga */
-            background-color: #222222; 
+            border: 3px solid #FFFFFF;
+            background-color: #000000; 
             overflow: hidden;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 6px 6px 0px #000;
+            transition: transform 0.2s;
         }
 
         .gallery-item:hover {
-            transform: translateY(-5px);
-            background-color: #333333;
+            transform: translate(-4px, -4px);
+            box-shadow: 10px 10px 0px #000;
         }
 
         .gallery-item img {
@@ -264,16 +359,10 @@
             height: 100%;
             object-fit: cover; 
             display: block;
-            transition: transform 0.4s ease;
         }
 
-        /* Si la imagen no carga, este estilo ayuda a centrar el texto alternativo */
         .gallery-item img:not([src]) {
             display: none;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05); 
         }
 
         .art-label {
@@ -282,38 +371,73 @@
             left: 12px;
             font-size: 0.8rem;
             text-transform: uppercase;
-            background-color: #ff0000;
+            background-color: #000000;
             padding: 4px 10px;
             letter-spacing: 1px;
-            font-weight: 700;
-            border: 1px solid #FFFFFF;
+            font-weight: 900;
+            border: 2px solid #FFFFFF;
             z-index: 2;
         }
     </style>
 </head>
 <body>
 
+    <!-- FONDO DE VIDEO SUPERIOR -->
+    <div class="video-bg-container">
+        <video autoplay muted loop playsinline>
+            <source src="BALLROOM.mp4" type="video/mp4">
+            <source src="BALLROOM.mov" type="video/quicktime">
+        </video>
+    </div>
+
+    <!-- LÍNEA DIVISORIA MARQUESINA -->
+    <div class="marquee-divider">
+        <div class="marquee-text">
+            quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <!-- CONTENIDO SUPERIOR (GRID) -->
     <div class="container">
         
+        <!-- Izquierda: Títulos -->
         <header class="header-section">
             <p class="subtitle-top">Volcanes y caminos que parecen guardar secretos ahí comenzó mi historia.</p>
             <h1 class="main-title">Everybody<br>Hates<br>Clara</h1>
         </header>
 
+        <!-- Derecha: Acordeones Desplegables Punk -->
         <main class="content-section">
-            <p class="paragraph">
-                Soy Clara, una artista poblana que emergió, como los escorpiones, de uno de los rincones más húmedos y escondidos de la tierra: San Nicolás de los Ranchos.
-            </p>
-            <p class="paragraph">
-                Como los escorpiones, provengo de una familia numerosa. Siempre estuve rodeada de gente, de voces y de vida. Sin embargo, también aprendí lo que significa sentirse sola aun estando acompañada.
-            </p>
-            <p class="paragraph">
-                Mi historia recorre los senderos de mi infancia, los desafíos que moldearon mi carácter, las dudas, los sueños y las decisiones que me trajeron hasta aquí. Es una historia de raíces, de búsqueda y de transformación.
-            </p>
-            <p class="paragraph">
-                Desde mis inicios hasta el presente, cada paso ha dejado una huella. Te invito a descubrirla.
-            </p>
             
+            <button class="punk-accordion">01. Orígenes</button>
+            <div class="punk-panel">
+                <p class="paragraph">
+                    Soy Clara, una artista poblana que emergió, como los escorpiones, de uno de los rincones más húmedos y escondidos de la tierra: San Nicolás de los Ranchos.
+                </p>
+            </div>
+
+            <button class="punk-accordion">02. Raíces</button>
+            <div class="punk-panel">
+                <p class="paragraph">
+                    Como los escorpiones, provengo de una familia numerosa. Siempre estuve rodeada de gente, de voces y de vida. Sin embargo, también aprendí lo que significa sentirse sola aun estando acompañada.
+                </p>
+            </div>
+
+            <button class="punk-accordion">03. El Camino</button>
+            <div class="punk-panel">
+                <p class="paragraph">
+                    Mi historia recorre los senderos de mi infancia, los desafíos que moldearon mi carácter, las dudas, los sueños y las decisiones que me trajeron hasta aquí. Es una historia de raíces, de búsqueda y de transformación.
+                </p>
+            </div>
+
+            <button class="punk-accordion">04. El Presente</button>
+            <div class="punk-panel">
+                <p class="paragraph">
+                    Desde mis inicios hasta el presente, cada paso ha dejado una huella. Te invito a descubrirla.
+                </p>
+            </div>
+            
+            <!-- REPRODUCTOR CD -->
             <div class="cd-player-container">
                 <div class="cd-song-title">TRACK: OCTUBRE22</div>
                 
@@ -328,8 +452,8 @@
                 </div>
 
                 <div class="volume-container">
-                    <span class="volume-label">VOL</span>
-                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.7">
+                    <span class="volume-label" id="volPercent">VOL: 70%</span>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.70">
                 </div>
 
                 <audio id="audioTrack" src="OCTUBRE22.mp3" preload="auto"></audio>
@@ -338,37 +462,58 @@
 
     </div>
 
+    <!-- GALERÍA INFERIOR -->
     <section class="gallery-grid">
         
+        <!-- Tarjeta 1: grafico 1 -->
         <a href="https://www.instagram.com/everybody.hates.clara/" target="_blank" rel="noopener" class="gallery-item">
             <img src="grafico1.jpg" alt="grafico 1">
             <div class="art-label">grafico 1</div>
         </a>
 
+        <!-- Tarjeta 2: escorpion2 -->
         <a href="https://x.com/ChiliClara" target="_blank" rel="noopener" class="gallery-item">
             <img src="escorpion2.png" alt="escorpion2">
             <div class="art-label">escorpion2</div>
         </a>
 
+        <!-- Tarjeta 3: CLARA123 (Actualizada) -->
         <a href="https://readymag.website/5091076" target="_blank" rel="noopener" class="gallery-item">
-            <img src="gfcl1.jpg" alt="GFCL-1">
-            <div class="art-label">GFCL-1</div>
+            <img src="CLARA123.jpg" alt="CLARA123">
+            <div class="art-label">CLARA123</div>
         </a>
 
     </section>
 
+    <!-- LÓGICA JAVASCRIPT -->
     <script>
+        // LÓGICA DE LAS BARRAS DESPLEGABLES (ACCORDION)
+        const acc = document.getElementsByClassName("punk-accordion");
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+            });
+        }
+
+        // LÓGICA DEL REPRODUCTOR CD
         const audio = document.getElementById('audioTrack');
         const playBtn = document.getElementById('playBtn');
         const stopBtn = document.getElementById('stopBtn');
         const volumeSlider = document.getElementById('volumeSlider');
+        const volPercent = document.getElementById('volPercent');
         const cdDisc = document.getElementById('cdDisc');
 
         audio.volume = volumeSlider.value;
 
         playBtn.addEventListener('click', () => {
             if (audio.paused) {
-                audio.play().catch(err => console.log("Falta archivo de audio local: OCTUBRE22.mp3"));
+                audio.play().catch(err => console.log("Agrega el archivo: OCTUBRE22.mp3"));
                 playBtn.textContent = 'Pause';
                 cdDisc.style.animationPlayState = 'running';
             } else {
@@ -386,7 +531,9 @@
         });
 
         volumeSlider.addEventListener('input', (e) => {
-            audio.volume = e.target.value;
+            const val = e.target.value;
+            audio.volume = val;
+            volPercent.textContent = `VOL: ${Math.round(val * 100)}%`;
         });
 
         audio.addEventListener('ended', () => {
