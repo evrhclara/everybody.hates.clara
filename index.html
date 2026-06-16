@@ -1,184 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Everybody Hates Clara - Landing Page</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <div class="top-content-container">
-        
-        <video autoplay muted loop playsinline id="altoVideo" preload="auto" class="video-fondo-seccion">
-            <source src="ALTO.webm" type="video/webm">
-        </video>
-        
-        <header class="header-section">
-            <p class="subtitle-top">Volcanes y caminos que parecen guardar secretos ahí comenzó mi historia.</p>
-            <h1 class="main-title">Everybody<br>Hates<br>Clara</h1>
-        </header>
-
-        <main class="content-section">
-            
-            <button class="punk-accordion">01. Orígenes</button>
-            <div class="punk-panel">
-                <p class="paragraph">
-                    Soy Clara, una artista poblana que emergió, como los escorpiones, de uno de los rincones más húmedos y escondidos de la tierra: San Nicolás de los Ranchos.
-                </p>
-            </div>
-
-            <button class="punk-accordion">02. Raíces</button>
-            <div class="punk-panel">
-                <p class="paragraph">
-                    Como los escorpiones, provengo de una familia numerosa. Siempre estuve rodeada de gente, de voces y de vida. Sin embargo, también aprendí lo que significa sentirse sola aun estando acompañada.
-                </p>
-            </div>
-
-            <button class="punk-accordion">03. El Camino</button>
-            <div class="punk-panel">
-                <p class="paragraph">
-                    Mi historia recorre los senderos de mi infancia, los desafíos que moldearon mi carácter, las dudas, los sueños y las decisiones que me trajeron hasta aquí. Es una historia de raíces, de búsqueda y de transformación.
-                </p>
-            </div>
-
-            <button class="punk-accordion">04. El Presente</button>
-            <div class="punk-panel">
-                <p class="paragraph">
-                    Desde mis inicios hasta el presente, cada paso ha dejado una huella. Te invito a descubrirla.
-                </p>
-            </div>
-            
-            <div class="player-multimedia-wrapper">
-                
-                <div id="sticker1" class="draggable-sticker">
-                    <img src="STICKER1.png" alt="Sticker 1" onerror="this.style.display='none';">
-                </div>
-                <div id="sticker2" class="draggable-sticker">
-                    <img src="STICKER2.png" alt="Sticker 2" onerror="this.style.display='none';">
-                </div>
-                <div id="sticker3" class="draggable-sticker">
-                    <img src="STICKER3.png" alt="Sticker 3" onerror="this.style.display='none';">
-                </div>
-                <div id="sticker4" class="draggable-sticker">
-                    <img src="STICKER4.png" alt="Sticker 4" onerror="this.style.display='none';">
-                </div>
-
-                <div class="cd-player-container">
-                    <div class="cd-song-title">
-                        <span>TRACK: OCTUBRE22</span>
-                        <div class="led-indicator" id="statusLed"></div>
-                    </div>
-                    
-                    <div class="cd-disc" id="cdDisc">
-                        <div class="cd-center-hole"></div>
-                        <img src="CD.png" alt="Portada CD" class="cd-cover" onerror="this.style.opacity='0'">
-                    </div>
-
-                    <div class="cd-controls">
-                        <button class="btn-control" id="playBtn">Play</button>
-                        <button class="btn-control" id="stopBtn">Stop</button>
-                    </div>
-
-                    <div class="volume-container">
-                        <span class="volume-label" id="volPercent">VOL: 70%</span>
-                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.70">
-                    </div>
-
-                    <audio id="audioTrack" src="OCTUBRE22.mp3" preload="auto"></audio>
-                </div>
-
-                <div class="alto-video-container"></div>
-
-            </div>
-        </main>
-
-    </div>
-
-    <div class="bottom-red-section">
-        
-        <div class="marquee-divider">
-            <div class="marquee-text">
-                quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp;
-            </div>
-        </div>
-
-        <section class="independent-photos-container">
-            
-            <a href="https://www.instagram.com/everybody.hates.clara/" target="_blank" rel="noopener" class="polaroid-card">
-                <div class="polaroid-image-wrapper">
-                    <img src="grafico1.jpg" alt="grafico 1">
-                </div>
-                <div class="polaroid-caption-space"></div>
-            </a>
-
-            <a href="https://x.com/ChiliClara" target="_blank" rel="noopener" class="polaroid-card">
-                <div class="polaroid-image-wrapper">
-                    <img src="escorpion2.png" alt="escorpion2">
-                </div>
-                <div class="polaroid-caption-space"></div>
-            </a>
-
-            <a href="https://readymag.website/5091076" target="_blank" rel="noopener" class="polaroid-card">
-                <div class="polaroid-image-wrapper">
-                    <img src="CLARA123.jpg" alt="CLARA123">
-                </div>
-                <div class="polaroid-caption-space"></div>
-            </a>
-
-        </section>
-    </div>
-
-    <script>
-        // Lógica Acordeón
-        const acc = document.getElementsByClassName("punk-accordion");
-        for (let i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                const panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                } 
-            });
-        }
-
-        // Lógica CD Player
-        const audio = document.getElementById('audioTrack');
-        const playBtn = document.getElementById('playBtn');
-        const stopBtn = document.getElementById('stopBtn');
-        const volumeSlider = document.getElementById('volumeSlider');
-        const volPercent = document.getElementById('volPercent');
-        const cdDisc = document.getElementById('cdDisc');
-        const statusLed = document.getElementById('statusLed');
-
-        audio.volume = volumeSlider.value;
-
-        playBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play().catch(err => console.log("Agrega el archivo: OCTUBRE22.mp3"));
-                playBtn.textContent = 'Pause';
-                cdDisc.style.animationPlayState = 'running';
-                statusLed.classList.add('active');
-            } else {
-                audio.pause();
-                playBtn.textContent = 'Play';
-                cdDisc.style.animationPlayState = 'paused';
-                statusLed.classList.remove('active');
-            }
-        });
-
-        stopBtn.addEventListener('click', () => {
-            audio.pause();
-            audio.currentTime = 0;
-            playBtn.textContent = 'Play';
-            cdDisc.style.animationPlayState = 'paused';
 /* Reset básico */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -641,3 +460,184 @@ body {
     border-bottom: 2px dashed #e0e0e0;
     height: 10px;
 }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everybody Hates Clara - Landing Page</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="top-content-container">
+        
+        <video autoplay muted loop playsinline id="altoVideo" preload="auto" class="video-fondo-seccion">
+            <source src="ALTO.webm" type="video/webm">
+        </video>
+        
+        <header class="header-section">
+            <p class="subtitle-top">Volcanes y caminos que parecen guardar secretos ahí comenzó mi historia.</p>
+            <h1 class="main-title">Everybody<br>Hates<br>Clara</h1>
+        </header>
+
+        <main class="content-section">
+            
+            <button class="punk-accordion">01. Orígenes</button>
+            <div class="punk-panel">
+                <p class="paragraph">
+                    Soy Clara, una artista poblana que emergió, como los escorpiones, de uno de los rincones más húmedos y escondidos de la tierra: San Nicolás de los Ranchos.
+                </p>
+            </div>
+
+            <button class="punk-accordion">02. Raíces</button>
+            <div class="punk-panel">
+                <p class="paragraph">
+                    Como los escorpiones, provengo de una familia numerosa. Siempre estuve rodeada de gente, de voces y de vida. Sin embargo, también aprendí lo que significa sentirse sola aun estando acompañada.
+                </p>
+            </div>
+
+            <button class="punk-accordion">03. El Camino</button>
+            <div class="punk-panel">
+                <p class="paragraph">
+                    Mi historia recorre los senderos de mi infancia, los desafíos que moldearon mi carácter, las dudas, los sueños y las decisiones que me trajeron hasta aquí. Es una historia de raíces, de búsqueda y de transformación.
+                </p>
+            </div>
+
+            <button class="punk-accordion">04. El Presente</button>
+            <div class="punk-panel">
+                <p class="paragraph">
+                    Desde mis inicios hasta el presente, cada paso ha dejado una huella. Te invito a descubrirla.
+                </p>
+            </div>
+            
+            <div class="player-multimedia-wrapper">
+                
+                <div id="sticker1" class="draggable-sticker">
+                    <img src="STICKER1.png" alt="Sticker 1" onerror="this.style.display='none';">
+                </div>
+                <div id="sticker2" class="draggable-sticker">
+                    <img src="STICKER2.png" alt="Sticker 2" onerror="this.style.display='none';">
+                </div>
+                <div id="sticker3" class="draggable-sticker">
+                    <img src="STICKER3.png" alt="Sticker 3" onerror="this.style.display='none';">
+                </div>
+                <div id="sticker4" class="draggable-sticker">
+                    <img src="STICKER4.png" alt="Sticker 4" onerror="this.style.display='none';">
+                </div>
+
+                <div class="cd-player-container">
+                    <div class="cd-song-title">
+                        <span>TRACK: OCTUBRE22</span>
+                        <div class="led-indicator" id="statusLed"></div>
+                    </div>
+                    
+                    <div class="cd-disc" id="cdDisc">
+                        <div class="cd-center-hole"></div>
+                        <img src="CD.png" alt="Portada CD" class="cd-cover" onerror="this.style.opacity='0'">
+                    </div>
+
+                    <div class="cd-controls">
+                        <button class="btn-control" id="playBtn">Play</button>
+                        <button class="btn-control" id="stopBtn">Stop</button>
+                    </div>
+
+                    <div class="volume-container">
+                        <span class="volume-label" id="volPercent">VOL: 70%</span>
+                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.70">
+                    </div>
+
+                    <audio id="audioTrack" src="OCTUBRE22.mp3" preload="auto"></audio>
+                </div>
+
+                <div class="alto-video-container"></div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <div class="bottom-red-section">
+        
+        <div class="marquee-divider">
+            <div class="marquee-text">
+                quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+            </div>
+        </div>
+
+        <section class="independent-photos-container">
+            
+            <a href="https://www.instagram.com/everybody.hates.clara/" target="_blank" rel="noopener" class="polaroid-card">
+                <div class="polaroid-image-wrapper">
+                    <img src="grafico1.jpg" alt="grafico 1">
+                </div>
+                <div class="polaroid-caption-space"></div>
+            </a>
+
+            <a href="https://x.com/ChiliClara" target="_blank" rel="noopener" class="polaroid-card">
+                <div class="polaroid-image-wrapper">
+                    <img src="escorpion2.png" alt="escorpion2">
+                </div>
+                <div class="polaroid-caption-space"></div>
+            </a>
+
+            <a href="https://readymag.website/5091076" target="_blank" rel="noopener" class="polaroid-card">
+                <div class="polaroid-image-wrapper">
+                    <img src="CLARA123.jpg" alt="CLARA123">
+                </div>
+                <div class="polaroid-caption-space"></div>
+            </a>
+
+        </section>
+    </div>
+
+    <script>
+        // Lógica Acordeón
+        const acc = document.getElementsByClassName("punk-accordion");
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+            });
+        }
+
+        // Lógica CD Player
+        const audio = document.getElementById('audioTrack');
+        const playBtn = document.getElementById('playBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volPercent = document.getElementById('volPercent');
+        const cdDisc = document.getElementById('cdDisc');
+        const statusLed = document.getElementById('statusLed');
+
+        audio.volume = volumeSlider.value;
+
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().catch(err => console.log("Agrega el archivo: OCTUBRE22.mp3"));
+                playBtn.textContent = 'Pause';
+                cdDisc.style.animationPlayState = 'running';
+                statusLed.classList.add('active');
+            } else {
+                audio.pause();
+                playBtn.textContent = 'Play';
+                cdDisc.style.animationPlayState = 'paused';
+                statusLed.classList.remove('active');
+            }
+        });
+
+        stopBtn.addEventListener('click', () => {
+            audio.pause();
+            audio.currentTime = 0;
+            playBtn.textContent = 'Play';
+            cdDisc.style.animationPlayState = 'paused';
