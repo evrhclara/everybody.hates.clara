@@ -28,13 +28,13 @@
             overflow-x: hidden;
         }
 
-        /* FONDO DIVIDIDO: VIDEO EN LA SECCIÓN SUPERIOR AMPLITUD 65% */
+        /* FONDO DIVIDIDO: VIDEO EN LA SECCIÓN SUPERIOR AMPLITUD 78% */
         .video-bg-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 65vh; /* Ajustado para que el video baje junto con la línea */
+            height: 78vh; /* El video ahora baja hasta el 78% de la pantalla */
             overflow: hidden;
             z-index: -2;
             background-color: #000;
@@ -47,10 +47,10 @@
             opacity: 0.45; 
         }
 
-        /* LÍNEA DIVISORIA CON LA FRASE EN MEDIO (MÁS ABAJO - 65vh) */
+        /* LÍNEA DIVISORIA CON LA FRASE EN MEDIO (MÁS ABAJO AÚN - 78vh) */
         .marquee-divider {
             position: absolute;
-            top: 65vh; /* Bajado del 50vh al 65vh */
+            top: 78vh; /* Bajado al 78vh para que quede al ras del video */
             left: 0;
             width: 100%;
             background-color: #000000;
@@ -318,7 +318,7 @@
         .gallery-grid {
             max-width: 1300px;
             width: 100%;
-            margin: 140px auto 0 auto; /* Aumentado ligeramente para mantener buena separación de la nueva línea baja */
+            margin: 160px auto 0 auto; /* Ajustado el margen superior para mantener simetría con la nueva posición de la línea */
             display: grid;
             grid-template-columns: 1fr; 
             gap: 20px;
