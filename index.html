@@ -28,13 +28,13 @@
             overflow-x: hidden;
         }
 
-        /* FONDO DIVIDIDO: VIDEO EN LA MITAD SUPERIOR */
+        /* FONDO DIVIDIDO: VIDEO EN LA SECCIÓN SUPERIOR AMPLITUD 65% */
         .video-bg-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 50vh; 
+            height: 65vh; /* Ajustado para que el video baje junto con la línea */
             overflow: hidden;
             z-index: -2;
             background-color: #000;
@@ -47,10 +47,10 @@
             opacity: 0.45; 
         }
 
-        /* LÍNEA DIVISORIA CON LA FRASE EN MEDIO */
+        /* LÍNEA DIVISORIA CON LA FRASE EN MEDIO (MÁS ABAJO - 65vh) */
         .marquee-divider {
             position: absolute;
-            top: 50vh; 
+            top: 65vh; /* Bajado del 50vh al 65vh */
             left: 0;
             width: 100%;
             background-color: #000000;
@@ -318,7 +318,7 @@
         .gallery-grid {
             max-width: 1300px;
             width: 100%;
-            margin: 120px auto 0 auto; 
+            margin: 140px auto 0 auto; /* Aumentado ligeramente para mantener buena separación de la nueva línea baja */
             display: grid;
             grid-template-columns: 1fr; 
             gap: 20px;
@@ -439,7 +439,6 @@
                 
                 <div class="cd-disc" id="cdDisc">
                     <div class="cd-center-hole"></div>
-                    <!-- Cambiado de luchacd.jpg a CD.PNG -->
                     <img src="CD.PNG" alt="Portada CD" class="cd-cover" onerror="this.style.display='none'">
                 </div>
 
