@@ -132,7 +132,7 @@
             flex-direction: column;
             gap: 16px;
             margin-top: 20px;
-            position: relative; /* Necesario para contener los stickers relativamente al inicio */
+            position: relative;
         }
 
         .punk-accordion {
@@ -191,7 +191,7 @@
             text-align: justify;
         }
 
-        /* SECCIÓN DEL REPRODUCTOR Y LA IMAGEN ALTO */
+        /* SECCIÓN DEL REPRODUCTOR Y VIDEO ALTO */
         .player-multimedia-wrapper {
             display: flex;
             flex-direction: column;
@@ -210,20 +210,22 @@
             }
         }
 
-        /* IMAGEN ALTO ELEVADA */
-        .alto-image-container {
+        /* CONTENEDOR VIDEO ALTO */
+        .alto-video-container {
             max-width: 180px;
             width: 100%;
             box-shadow: 6px 6px 0px #000;
             border: 3px solid #ffffff;
             background-color: #000;
             transform: rotate(-4deg);
+            overflow: hidden;
         }
 
-        .alto-image-container img {
+        .alto-video-container video {
             width: 100%;
             display: block;
             height: auto;
+            object-fit: cover;
         }
 
         /* REPRODUCTOR DE CD ESTILO VINTAGE / ANALÓGICO */
@@ -397,7 +399,7 @@
             z-index: 99;
             cursor: move;
             user-select: none;
-            touch-action: none; /* Evita scrolls raros en móviles al arrastrar */
+            touch-action: none;
             background-color: #ffffff;
             color: #000000;
             border: 2px solid #000000;
@@ -409,7 +411,6 @@
             display: inline-block;
         }
 
-        /* Distribución inicial balanceada alrededor del área multimedia */
         #sticker1 { top: -20px; left: 10px; transform: rotate(-8deg); background-color: #ffff00; }
         #sticker2 { top: 40px; right: -15px; transform: rotate(12deg); background-color: #00ffff; }
         #sticker3 { bottom: -25px; left: 30px; transform: rotate(-5deg); color: #fff; background-color: #000000; border-color: #fff; }
@@ -480,7 +481,7 @@
 </head>
 <body>
 
-    <!-- FONDO DE VIDEO SUPERIOR -->
+    <!-- FONDO DE VIDEO SUPERIOR (BALLROOM.webm) -->
     <div class="video-bg-container">
         <video autoplay muted loop playsinline>
             <source src="BALLROOM.webm" type="video/webm">
@@ -488,7 +489,7 @@
         </video>
     </div>
 
-    <!-- LÍNEA DIVISORIA MARQUESINA ACTUALIZADA -->
+    <!-- LÍNEA DIVISORIA MARQUESINA -->
     <div class="marquee-divider">
         <div class="marquee-text">
             quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp;
@@ -535,10 +536,10 @@
                 </p>
             </div>
             
-            <!-- CONTENEDOR MULTIMEDIA: REPRODUCTOR, IMAGEN ALTO Y STICKERS -->
+            <!-- CONTENEDOR MULTIMEDIA -->
             <div class="player-multimedia-wrapper">
                 
-                <!-- STICKERS REMOVIBLES Y DISTRIBUIDOS -->
+                <!-- STICKERS REMOVIBLES -->
                 <div id="sticker1" class="draggable-sticker">STICKER1</div>
                 <div id="sticker2" class="draggable-sticker">STICKER2</div>
                 <div id="sticker3" class="draggable-sticker">STICKER3</div>
@@ -569,9 +570,11 @@
                     <audio id="audioTrack" src="OCTUBRE22.mp3" preload="auto"></audio>
                 </div>
 
-                <!-- IMAGEN ALTO JUNTO AL CD -->
-                <div class="alto-image-container">
-                    <img src="ALTO" alt="ALTO" onerror="this.parentElement.style.display='none'; console.log('Asegúrate de agregar el archivo ALTO');">
+                <!-- NUEVO VIDEO ALTO.webm JUNTO AL CD -->
+                <div class="alto-video-container">
+                    <video autoplay muted loop playsinline id="altoVideo">
+                        <source src="ALTO.webm" type="video/webm">
+                    </video>
                 </div>
 
             </div>
@@ -605,7 +608,7 @@
 
     </section>
 
-    <!-- LÓGICA JAVASCRIPT (ACORDEÓN, CD Y STICKERS ARRASTRABLES) -->
+    <!-- LÓGICA JAVASCRIPT -->
     <script>
         // Lógica Acordeón
         const acc = document.getElementsByClassName("punk-accordion");
@@ -666,7 +669,7 @@
             statusLed.classList.remove('active');
         });
 
-        // LÓGICA DRAG AND DROP PARA LOS STICKERS (Soporta Mouse y Touch Móvil)
+        // LÓGICA DRAG AND DROP PARA LOS STICKERS
         const stickers = document.querySelectorAll('.draggable-sticker');
 
         stickers.forEach(sticker => {
@@ -696,7 +699,7 @@
                     initialY = e.clientY - yOffset;
                 }
                 active = true;
-                sticker.style.zIndex = "1000"; // Pasa al frente mientras se arrastra
+                sticker.style.zIndex = "1000";
             }
 
             function dragEnd() {
@@ -725,9 +728,7 @@
             }
 
             function setTranslate(xPos, yPos, el) {
-                // Mantiene la rotación visual nativa del sticker mientras se desplaza
-                const currentRotation = window.getComputedStyle(el).getPropertyValue('transform');
-                el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0px) `;
+                el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0px)`;
             }
         });
     </script>
