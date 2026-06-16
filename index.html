@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Everybody Hates Clara - Landing Page</title>
     
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
@@ -33,7 +34,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 50vh; /* Ocupa exactamente la mitad superior de la pantalla */
+            height: 50vh; 
             overflow: hidden;
             z-index: -2;
             background-color: #000;
@@ -43,13 +44,13 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.45; /* Filtro oscuro para no opacar el texto blanco */
+            opacity: 0.45; 
         }
 
         /* LÍNEA DIVISORIA CON LA FRASE EN MEDIO */
         .marquee-divider {
             position: absolute;
-            top: 50vh; /* Justo a la mitad de la página */
+            top: 50vh; 
             left: 0;
             width: 100%;
             background-color: #000000;
@@ -133,7 +134,6 @@
             margin-top: 20px;
         }
 
-        /* Barra picuda estilo fanzine/punk */
         .punk-accordion {
             background-color: #000000;
             color: #FFFFFF;
@@ -148,7 +148,6 @@
             position: relative;
             outline: none;
             transition: background-color 0.2s;
-            /* El truco de los bordes picudos asimétricos estilo punk */
             clip-path: polygon(0% 0%, 96% 0%, 100% 30%, 98% 75%, 100% 100%, 4% 100%, 0% 80%);
         }
 
@@ -158,7 +157,6 @@
             border-color: #000000;
         }
 
-        /* Flecha indicadora */
         .punk-accordion::after {
             content: ' ✚';
             font-size: 0.9rem;
@@ -169,7 +167,6 @@
             content: ' ✖';
         }
 
-        /* Panel oculto que guarda el texto */
         .punk-panel {
             max-height: 0;
             overflow: hidden;
@@ -321,7 +318,7 @@
         .gallery-grid {
             max-width: 1300px;
             width: 100%;
-            margin: 120px auto 0 auto; /* Más margen arriba para esquivar la línea central */
+            margin: 120px auto 0 auto; 
             display: grid;
             grid-template-columns: 1fr; 
             gap: 20px;
@@ -381,6 +378,7 @@
 </head>
 <body>
 
+    <!-- FONDO DE VIDEO SUPERIOR -->
     <div class="video-bg-container">
         <video autoplay muted loop playsinline>
             <source src="BALLROOM.mp4" type="video/mp4">
@@ -388,19 +386,23 @@
         </video>
     </div>
 
+    <!-- LÍNEA DIVISORIA MARQUESINA -->
     <div class="marquee-divider">
         <div class="marquee-text">
             quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp;
         </div>
     </div>
 
+    <!-- CONTENIDO SUPERIOR (GRID) -->
     <div class="container">
         
+        <!-- Izquierda: Títulos -->
         <header class="header-section">
             <p class="subtitle-top">Volcanes y caminos que parecen guardar secretos ahí comenzó mi historia.</p>
             <h1 class="main-title">Everybody<br>Hates<br>Clara</h1>
         </header>
 
+        <!-- Derecha: Acordeones Desplegables Punk -->
         <main class="content-section">
             
             <button class="punk-accordion">01. Orígenes</button>
@@ -431,12 +433,14 @@
                 </p>
             </div>
             
+            <!-- REPRODUCTOR CD -->
             <div class="cd-player-container">
                 <div class="cd-song-title">TRACK: OCTUBRE22</div>
                 
                 <div class="cd-disc" id="cdDisc">
                     <div class="cd-center-hole"></div>
-                    <img src="luchacd.jpg" alt="" class="cd-cover" onerror="this.style.display='none'">
+                    <!-- Cambiado de luchacd.jpg a CD.PNG -->
+                    <img src="CD.PNG" alt="Portada CD" class="cd-cover" onerror="this.style.display='none'">
                 </div>
 
                 <div class="cd-controls">
@@ -455,6 +459,7 @@
 
     </div>
 
+    <!-- GALERÍA INFERIOR -->
     <section class="gallery-grid">
         
         <a href="https://www.instagram.com/everybody.hates.clara/" target="_blank" rel="noopener" class="gallery-item">
@@ -468,14 +473,14 @@
         </a>
 
         <a href="https://readymag.website/5091076" target="_blank" rel="noopener" class="gallery-item">
-            <img src="gfcl1.jpg" alt="GFCL-1">
-            <div class="art-label">GFCL-1</div>
+            <img src="CLARA123.jpg" alt="CLARA123">
+            <div class="art-label">CLARA123</div>
         </a>
 
     </section>
 
+    <!-- LÓGICA JAVASCRIPT -->
     <script>
-        // LÓGICA DE LAS BARRAS DESPLEGABLES (ACCORDION)
         const acc = document.getElementsByClassName("punk-accordion");
         for (let i = 0; i < acc.length; i++) {
             acc[i].addEventListener("click", function() {
@@ -489,7 +494,6 @@
             });
         }
 
-        // LÓGICA DEL REPRODUCTOR CD
         const audio = document.getElementById('audioTrack');
         const playBtn = document.getElementById('playBtn');
         const stopBtn = document.getElementById('stopBtn');
@@ -518,7 +522,6 @@
             cdDisc.style.animationPlayState = 'paused';
         });
 
-        // Actualiza el volumen y cambia el número en pantalla en tiempo real
         volumeSlider.addEventListener('input', (e) => {
             const val = e.target.value;
             audio.volume = val;
