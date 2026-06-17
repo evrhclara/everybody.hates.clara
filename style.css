@@ -1,6 +1,12 @@
-/* ==========================================================================
-   RESET BÁSICO
-   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;700;900&display=swap');
+
+/* Reset básico */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
