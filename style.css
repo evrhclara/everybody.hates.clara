@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;700;900&display=swap');
-
 /* Reset básico */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -7,15 +5,7 @@
     padding: 0;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-/* ==========================================================================
-   ESTILOS GENERALES
-   ========================================================================== */
+/* FONDO BASE NEGRO PARA LA SECCIÓN SUPERIOR */
 body {
     background-color: #000000; 
     color: #FFFFFF;
@@ -25,18 +15,62 @@ body {
     overflow-x: hidden;
 }
 
-/* Video de fondo para la sección superior */
+/* VIDEO DE FONDO INTEGRAL PARA LA SECCIÓN SUPERIOR */
 .video-fondo-seccion {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    opacity: 0.35;     /* Controla la opacidad del video de fondo */
-    pointer-events: none;
+    object-fit: cover; /* Asegura que cubra el área sin deformarse */
+    z-index: 1;        /* Queda por encima del fondo puro pero por debajo del contenido */
+    opacity: 0.35;     /* Ajusta este valor para regular qué tan brillante se ve el video en el fondo */
+    pointer-events: none; /* Permite clickear los elementos de encima sin interferencias */
 }
 
-/* ==========================================================================
-   ESTRUCTURA / CONTENEDORES
-   ========================================================================== */
+/* SECCIÓN INFERIOR ROJA */
+.bottom-red-section {
+    background-color: #ff0000; /* Rojo Puro */
+    width: 100%;
+    padding: 120px 24px 80px 24px;
+    position: relative;
+    z-index: 4;
+}
+
+/* LÍNEA DIVISORIA MARQUESINA */
+.marquee-divider {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    background-color: #000000;
+    border-top: 3px solid #FFFFFF;
+    border-bottom: 3px solid #FFFFFF;
+    padding: 8px 0;
+    z-index: 10;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    transform: translateY(-50%); 
+}
+
+.marquee-text {
+    display: inline-block;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #FFFFFF;
+    animation: marquee 25s linear infinite;
+    padding-left: 100%;
+}
+
+@keyframes marquee {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* CONTENEDOR PRINCIPAL INTERIOR (SECCIÓN NEGRA) */
 .top-content-container {
     max-width: 1300px;
     margin: 0 auto;
@@ -57,7 +91,7 @@ body {
     }
 }
 
-/* Columna Izquierda (Header) */
+/* COLUMNA IZQUIERDA (CONTENIDOS ELEVADOS POR SOBRE EL VIDEO) */
 .header-section {
     display: flex;
     flex-direction: column;
@@ -86,7 +120,7 @@ body {
     text-shadow: 4px 4px 0px #000;
 }
 
-/* Columna Derecha (Contenido) */
+/* COLUMNA DERECHA */
 .content-section {
     display: flex;
     flex-direction: column;
@@ -96,9 +130,6 @@ body {
     z-index: 2;
 }
 
-/* ==========================================================================
-   ACORDEÓN PUNK
-   ========================================================================== */
 .punk-accordion {
     background-color: #000000;
     color: #FFFFFF;
@@ -112,7 +143,7 @@ body {
     cursor: pointer;
     position: relative;
     outline: none;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s;
     z-index: 6;
     clip-path: polygon(0% 0%, 96% 0%, 100% 30%, 98% 75%, 100% 100%, 4% 100%, 0% 80%);
 }
@@ -155,9 +186,7 @@ body {
     text-align: justify;
 }
 
-/* ==========================================================================
-   REPRODUCTOR MULTIMEDIA & MARCO VACÍO
-   ========================================================================== */
+/* SECCIÓN DEL REPRODUCTOR Y ENCUADRE VACÍO */
 .player-multimedia-wrapper {
     display: flex;
     flex-direction: column;
@@ -176,19 +205,19 @@ body {
     }
 }
 
-/* Marco Inclinado Transparente */
+/* CONTENEDOR MARCO INCLINADO (VACÍO Y TRANSPARENTE) */
 .alto-video-container {
     max-width: 180px;
     width: 100%;
     height: 240px; 
     box-shadow: 6px 6px 0px #000;
     border: 3px solid #ffffff;
-    background-color: transparent;
+    background-color: transparent; /* Permite ver el video de fondo pasante */
     transform: rotate(-4deg);
     overflow: hidden;
 }
 
-/* Reproductor Analógico */
+/* REPRODUCTOR DE CD ESTILO VINTAGE / ANALÓGICO */
 .cd-player-container {
     max-width: 400px;
     background: #111111;
@@ -226,21 +255,18 @@ body {
     align-items: center;
 }
 
-/* Luz LED de Estado */
 .led-indicator {
     width: 8px;
     height: 8px;
     background-color: #550000;
     border-radius: 50%;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s;
 }
-
 .led-indicator.active {
     background-color: #00ff33;
     box-shadow: 0 0 8px #00ff33;
 }
 
-/* Disco CD */
 .cd-disc {
     width: 190px;
     height: 190px;
@@ -254,6 +280,10 @@ body {
     box-shadow: 0px 0px 15px rgba(0,0,0,0.7);
     animation: spin 3.5s linear infinite;
     animation-play-state: paused; 
+}
+
+.cd-disc.playing {
+    animation-play-state: running;
 }
 
 .cd-cover {
@@ -286,7 +316,6 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* Controles de Audio */
 .cd-controls {
     display: flex;
     align-items: center;
@@ -305,7 +334,7 @@ body {
     text-transform: uppercase;
     cursor: pointer;
     box-shadow: 3px 3px 0px #000;
-    transition: transform 0.1s, box-shadow 0.1s;
+    transition: all 0.1s;
 }
 
 .btn-control:active {
@@ -318,7 +347,6 @@ body {
     color: #FFFFFF;
 }
 
-/* Barra de Volumen */
 .volume-container {
     display: flex;
     align-items: center;
@@ -354,9 +382,7 @@ body {
     border: 1px solid #000;
 }
 
-/* ==========================================================================
-   STICKERS INTERACTIVOS (DRAG & DROP)
-   ========================================================================== */
+/* STICKERS INTERACTIVOS */
 .draggable-sticker {
     position: absolute;
     z-index: 99;
@@ -380,53 +406,7 @@ body {
 #sticker3 { bottom: -30px; left: 30px; transform: rotate(-5deg); }
 #sticker4 { bottom: 80px; left: -45px; transform: rotate(15deg); }
 
-/* ==========================================================================
-   SECCIÓN INFERIOR (ROJA)
-   ========================================================================== */
-.bottom-red-section {
-    background-color: #ff0000; /* Rojo Puro */
-    width: 100%;
-    padding: 120px 24px 80px 24px;
-    position: relative;
-    z-index: 4;
-}
-
-/* Marquesina Infinita */
-.marquee-divider {
-    position: absolute;
-    top: 0; 
-    left: 0;
-    width: 100%;
-    background-color: #000000;
-    border-top: 3px solid #FFFFFF;
-    border-bottom: 3px solid #FFFFFF;
-    padding: 8px 0;
-    z-index: 10;
-    overflow: hidden;
-    white-space: nowrap;
-    display: flex;
-    transform: translateY(-50%); 
-}
-
-.marquee-text {
-    display: inline-block;
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #FFFFFF;
-    animation: marquee 25s linear infinite;
-    padding-left: 100%;
-}
-
-@keyframes marquee {
-    0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(-100%, 0, 0); }
-}
-
-/* ==========================================================================
-   FOTOS POLAROID INDEPENDIENTES
-   ========================================================================== */
+/* SECCIÓN DE FOTOS POLAROIDS */
 .independent-photos-container {
     max-width: 1200px;
     width: 100%;
@@ -450,7 +430,6 @@ body {
     color: #000000;
 }
 
-/* Ángulos desalineados iniciales para estilo fanzine/punk */
 .polaroid-card:nth-child(1) { transform: rotate(-3deg); }
 .polaroid-card:nth-child(2) { transform: rotate(2deg); margin-top: -15px; }
 .polaroid-card:nth-child(3) { transform: rotate(-1.5deg); }
