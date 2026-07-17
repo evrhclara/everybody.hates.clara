@@ -3,262 +3,482 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Everybody Hates Clara - Landing Page</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
+    <title>XX Feria de la Nuez de Castilla y el Chile en Nogada</title>
+    <style>
+        /* Importación de fuentes de Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.4;
+            width: 100%;
+            overflow-x: hidden;
+            padding-bottom: 60px; /* Espacio para que la barra inferior fija no tape contenido */
+        }
+
+        /* Estructura de secciones de ancho completo */
+        section {
+            width: 100vw;
+            min-height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        /* Contenedor interno para centrar el contenido y mantener la legibilidad */
+        .section-content {
+            width: 100%;
+            max-width: 1100px;
+            padding: 80px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Tipografías consistentes */
+        .serif-font {
+            font-family: 'Playfair Display', 'Georgia', serif;
+            font-weight: 400;
+        }
+
+        .sans-font {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        /* ================= SECCIÓN 1 (Encabezado con imagen1.png) ================= */
+        .section-hero {
+            background: linear-gradient(rgba(10, 40, 5, 0.85), rgba(10, 40, 5, 0.85)), url('imagen1.png') center/cover no-repeat;
+            color: #e5a913; /* Tono dorado */
+        }
+
+        .section-hero .section-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section-hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            font-weight: 400;
+            max-width: 950px;
+        }
+
+        .section-hero p {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.4;
+            max-width: 600px;
+            color: #ffffff;
+        }
+
+
+        /* ================= SECCIÓN 2 (Ubicación con imagen2.png) ================= */
+        .section-ubicacion {
+            background: linear-gradient(rgba(4, 19, 0, 0.9), rgba(4, 19, 0, 0.9)), url('imagen2.png') center/cover no-repeat;
+        }
+
+        .section-ubicacion h2 {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .grid-ubicacion {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        /* Contenedor del mapa responsivo */
+        .map-embed-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .map-embed-container iframe {
+            width: 100% !important;
+            height: 100% !important;
+            border: 0;
+        }
+
+        .text-block-ubicacion {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .text-ubicacion {
+            font-size: 2rem;
+            line-height: 1.35;
+            color: #ffffff;
+            text-align: left;
+        }
+
+
+        /* ================= SECCIÓN GALERÍA (CARRUSEL VERTICAL) ================= */
+        .section-galeria {
+            background-color: #021a04;
+            padding: 60px 0;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section-galeria h2 {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .carousel-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding-bottom: 15px;
+            align-items: center;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            height: 8px;
+        }
+        .carousel-track::-webkit-scrollbar-thumb {
+            background: #e5a913;
+            border-radius: 4px;
+        }
+        .carousel-track::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .carousel-item {
+            /* Muestra 4 elementos verticales por fila en pantallas grandes */
+            flex: 0 0 calc(25% - 15px);
+            scroll-snap-align: start;
+            /* Proporción vertical estilizada (2 de ancho por 3 de alto) */
+            aspect-ratio: 2 / 3;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            /* Evita que se pixelee o distorsione adaptándose al contenedor vertical */
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-item img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Ajuste para los iframes de video dentro del contenedor vertical */
+        .carousel-item iframe {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover;
+        }
+
+
+        /* ================= SECCIÓN 3 (¿Cuándo? - Verde Pino Sólido) ================= */
+        .section-cuando {
+            background-color: #012b05;
+            text-align: center;
+        }
+
+        .section-cuando h2 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        .section-cuando p {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            color: #ffffff;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+
+        /* ================= SECCIÓN MULTIMEDIA (VIDEOS + IMAGEN) ================= */
+        .section-multimedia {
+            background-color: #051802;
+            padding: 80px 0;
+        }
+
+        .grid-multimedia {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .media-box {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+        }
+
+        .media-box iframe {
+            max-width: 100%;
+            display: block;
+            background: #000;
+        }
+
+        .media-img-center {
+            width: 100%;
+            height: 100%;
+            max-height: 591px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+
+        /* ================= SECCIÓN 4 (Cierre con imagen3.png) ================= */
+        .section-cierre {
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('imagen3.png') center/cover no-repeat;
+            text-align: center;
+            padding-bottom: 120px; /* Margen extra por la barra inferior */
+        }
+
+        .section-cierre p {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            color: #ffffff;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+
+        /* ================= BARRA INFERIOR DE REDES SOCIALES ================= */
+        .social-footer-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            background-color: #000000;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.8);
+        }
+
+        .social-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #e5a913;
+        }
+
+        .social-link::before {
+            content: "ff";
+            font-family: monospace;
+            background: #ffffff;
+            color: #000000;
+            font-weight: 900;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            text-transform: lowercase;
+            transition: background 0.3s ease;
+        }
+
+        .social-link:hover::before {
+            background: #e5a913;
+        }
+
+
+        /* Adaptabilidad para pantallas móviles y tablets */
+        @media (max-width: 992px) {
+            .carousel-item {
+                flex: 0 0 calc(50% - 10px); /* 2 elementos por vista en tablets */
+            }
+            .grid-multimedia {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .media-img-center {
+                max-height: 450px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-hero h1 { font-size: 3rem; }
+            .grid-ubicacion { 
+                grid-template-columns: 1fr; 
+                gap: 30px;
+            }
+            .text-ubicacion { text-align: center; }
+            .carousel-item {
+                flex: 0 0 75%; /* 1 elemento vertical casi completo en móviles */
+            }
+            .section-cuando p { font-size: 2.8rem; }
+            .section-cierre p { font-size: 1.8rem; }
+            .social-footer-bar { padding: 12px 10px; }
+            .social-link { font-size: 0.9rem; }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="top-content-container">
-        
-        <!-- Video de fondo corregido con su tipo correspondiente -->
-        <video autoplay muted loop playsinline id="altoVideo" preload="auto" class="video-fondo-seccion">
-            <source src="ALTO.mp4" type="video/mp4">
-        </video>
-        
-        <header class="header-section">
-            <p class="subtitle-top">Volcanes y caminos que parecen guardar secretos ahí comenzó mi historia.</p>
-            <h1 class="main-title">Everybody<br>Hates<br>Clara</h1>
-        </header>
+    <!-- SECCIÓN 1: CABECERA -->
+    <section class="section-hero">
+        <div class="section-content">
+            <h1 class="serif-font">XX Feria de la<br>Nuez de Castilla y el Chile en Nogada</h1>
+            <p>Una celebración que honra nuestras raíces, nuestra gastronomía y el sabor que nos identifica.</p>
+        </div>
+    </section>
 
-        <main class="content-section">
+    <!-- SECCIÓN 2: UBICACIÓN -->
+    <section class="section-ubicacion">
+        <div class="section-content">
+            <h2 class="sans-font">UBICACIÓN</h2>
             
-            <button class="punk-accordion">01. Orígenes</button>
-            <div class="punk-panel">
-                <p class="paragraph">
-                    Soy Clara, una artista poblana que emergió, como los escorpiones, de uno de los rincones más húmedos y escondidos de la tierra: San Nicolás de los Ranchos.
-                </p>
-            </div>
-
-            <button class="punk-accordion">02. Raíces</button>
-            <div class="punk-panel">
-                <p class="paragraph">
-                    Como los escorpiones, provengo de una familia numerosa. Siempre estuve rodeada de gente, de voces y de vida. Sin embargo, también aprendí lo que significa sentirse sola aun estando acompañada.
-                </p>
-            </div>
-
-            <button class="punk-accordion">03. El Camino</button>
-            <div class="punk-panel">
-                <p class="paragraph">
-                    Mi historia recorre los senderos de mi infancia, los desafíos que moldearon mi carácter, las dudas, los sueños y las decisiones que me trajeron hasta aquí. Es una historia de raíces, de búsqueda y de transformación.
-                </p>
-            </div>
-
-            <button class="punk-accordion">04. El Presente</button>
-            <div class="punk-panel">
-                <p class="paragraph">
-                    Desde mis inicios hasta el presente, cada paso ha dejado una huella. Te invito a descubrirla.
-                </p>
-            </div>
-            
-            <div class="player-multimedia-wrapper">
-                
-                <div id="sticker1" class="draggable-sticker">
-                    <img src="STICKER1.png" alt="Sticker 1" onerror="this.style.display='none';">
-                </div>
-                <div id="sticker2" class="draggable-sticker">
-                    <img src="STICKER2.png" alt="Sticker 2" onerror="this.style.display='none';">
-                </div>
-                <div id="sticker3" class="draggable-sticker">
-                    <img src="STICKER3.png" alt="Sticker 3" onerror="this.style.display='none';">
-                </div>
-                <div id="sticker4" class="draggable-sticker">
-                    <img src="STICKER4.png" alt="Sticker 4" onerror="this.style.display='none';">
+            <div class="grid-ubicacion">
+                <!-- MAPA GOOGLE INCRUSTADO -->
+                <div class="map-embed-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.747605274268!2d-98.48516602604896!3d19.074831552011705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfcbf050c36143%3A0xee19400814218a0!2s15a.%20FERIA%20DE%20LA%20NUEZ%20DE%20CASTILLA%20DE%20SAN%20PEDRO%20YANCUITLALPAN!5e0!3m2!1ses-419!2smx!4v1784138844970!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                 </div>
 
-                <div class="cd-player-container">
-                    <div class="cd-song-title">
-                        <span>TRACK: OCTUBRE22</span>
-                        <div class="led-indicator" id="statusLed"></div>
-                    </div>
-                    
-                    <div class="cd-disc" id="cdDisc">
-                        <div class="cd-center-hole"></div>
-                        <img src="CD.png" alt="Portada CD" class="cd-cover" onerror="this.style.opacity='0'">
-                    </div>
-
-                    <div class="cd-controls">
-                        <button class="btn-control" id="playBtn">Play</button>
-                        <button class="btn-control" id="stopBtn">Stop</button>
-                    </div>
-
-                    <div class="volume-container">
-                        <span class="volume-label" id="volPercent">VOL: 70%</span>
-                        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.70">
-                    </div>
-
-                    <audio id="audioTrack" src="OCTUBRE22.mp3" preload="auto"></audio>
+                <div class="text-block-ubicacion">
+                    <p class="serif-font text-ubicacion">
+                        San Pedro Yancuitlalpan,<br>
+                        San Nicolás de los Ranchos, Puebla
+                    </p>
                 </div>
-
-                <div class="alto-video-container"></div>
-
-            </div>
-        </main>
-
-    </div>
-
-    <div class="bottom-red-section">
-        
-        <div class="marquee-divider">
-            <div class="marquee-text">
-                quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp; quiero perder el miedo a intentarlo &nbsp;&nbsp;&bull;&nbsp;&nbsp; Todo lo bueno tarda &nbsp;&nbsp;&bull;&nbsp;&nbsp;
             </div>
         </div>
+    </section>
 
-        <section class="independent-photos-container">
-            
-            <a href="https://www.instagram.com/everybody.hates.clara/" target="_blank" rel="noopener" class="polaroid-card">
-                <div class="polaroid-image-wrapper">
-                    <img src="grafico1.jpg" alt="grafico 1">
+    <!-- SECCIÓN: CARRUSEL DE GALERÍA -->
+    <section class="section-galeria">
+        <h2 class="sans-font">Galería del Evento</h2>
+        <div class="carousel-wrapper">
+            <div class="carousel-track">
+                <!-- Video de Facebook en la primera posición -->
+                <div class="carousel-item">
+                    <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F61579289934113%2Fvideos%2F9613270108776631%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
                 </div>
-                <div class="polaroid-caption-space"></div>
-            </a>
+                
+                <div class="carousel-item"><img src="img2.jpg" alt="Galería 2"></div>
+                <div class="carousel-item"><img src="img3.jpg" alt="Galería 3"></div>
+                <div class="carousel-item"><img src="img4.jpg" alt="Galería 4"></div>
+                <div class="carousel-item"><img src="img5.jpg" alt="Galería 5"></div>
+                <div class="carousel-item"><img src="img6.jpg" alt="Galería 6"></div>
+                <div class="carousel-item"><img src="img7.jpg" alt="Galería 7"></div>
+                <div class="carousel-item"><img src="img8.jpg" alt="Galería 8"></div>
+                <div class="carousel-item"><img src="img9.jpg" alt="Galería 9"></div>
+                <div class="carousel-item"><img src="img10.jpg" alt="Galería 10"></div>
+            </div>
+        </div>
+    </section>
 
-            <a href="https://x.com/ChiliClara" target="_blank" rel="noopener" class="polaroid-card">
-                <div class="polaroid-image-wrapper">
-                    <img src="escorpion2.png" alt="escorpion2">
+    <!-- SECCIÓN 3: ¿CUÁNDO? -->
+    <section class="section-cuando">
+        <div class="section-content">
+            <h2 class="sans-font">¿CUÁNDO?</h2>
+            <p class="serif-font">Todos los fines de semana de agosto 2026</p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN MULTIMEDIA (VIDEOS + IMAGEN CENTRAL) -->
+    <section class="section-multimedia">
+        <div class="section-content">
+            <div class="grid-multimedia">
+                
+                <!-- Video Izquierdo (Facebook Reel 1) -->
+                <div class="media-box">
+                    <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F27509058742089050%2F&show_text=true&width=267&t=0" width="267" height="591" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
                 </div>
-                <div class="polaroid-caption-space"></div>
-            </a>
 
-            <a href="https://readymag.website/5091076" target="_blank" rel="noopener" class="polaroid-card">
-                <div class="polaroid-image-wrapper">
-                    <img src="CLARA123.jpg" alt="CLARA123">
+                <!-- Foto del Centro -->
+                <div class="media-box">
+                    <img src="IMAGENCENTRO.jpeg" alt="Imagen Central Promocional" class="media-img-center">
                 </div>
-                <div class="polaroid-caption-space"></div>
-            </a>
 
-        </section>
-    </div>
+                <!-- Video Derecho (Facebook Reel 2) -->
+                <div class="media-box">
+                    <iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1097877328847288%2F&show_text=true&width=267&t=0" width="267" height="591" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                </div>
 
-    <script>
-        // Lógica Acordeón
-        const acc = document.getElementsByClassName("punk-accordion");
-        for (let i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                const panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                } 
-            });
-        }
+            </div>
+        </div>
+    </section>
 
-        // Lógica CD Player
-        const audio = document.getElementById('audioTrack');
-        const playBtn = document.getElementById('playBtn');
-        const stopBtn = document.getElementById('stopBtn');
-        const volumeSlider = document.getElementById('volumeSlider');
-        const volPercent = document.getElementById('volPercent');
-        const cdDisc = document.getElementById('cdDisc');
-        const statusLed = document.getElementById('statusLed');
+    <!-- SECCIÓN 4: CIERRE -->
+    <section class="section-cierre">
+        <div class="section-content">
+            <p class="serif-font">
+                Aquí, donde nace la Nuez de Castilla, también nace el auténtico sabor del Chile en Nogada.
+            </p>
+        </div>
+    </section>
 
-        audio.volume = volumeSlider.value;
-
-        playBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play().catch(err => console.log("Agrega el archivo: OCTUBRE22.mp3"));
-                playBtn.textContent = 'Pause';
-                cdDisc.style.animationPlayState = 'running';
-                statusLed.classList.add('active');
-            } else {
-                audio.pause();
-                playBtn.textContent = 'Play';
-                cdDisc.style.animationPlayState = 'paused';
-                statusLed.classList.remove('active');
-            }
-        });
-
-        stopBtn.addEventListener('click', () => {
-            audio.pause();
-            audio.currentTime = 0;
-            playBtn.textContent = 'Play';
-            cdDisc.style.animationPlayState = 'paused';
-            statusLed.classList.remove('active');
-        });
-
-        volumeSlider.addEventListener('input', (e) => {
-            const val = e.target.value;
-            audio.volume = val;
-            volPercent.textContent = `VOL: ${Math.round(val * 100)}%`;
-        });
-
-        audio.addEventListener('ended', () => {
-            playBtn.textContent = 'Play';
-            cdDisc.style.animationPlayState = 'paused';
-            statusLed.classList.remove('active');
-        });
-
-        // Lógica de Arrastre para los Stickers (Drag and Drop)
-        const stickers = document.querySelectorAll('.draggable-sticker');
-
-        stickers.forEach(sticker => {
-            let active = false;
-            let currentX;
-            let currentY;
-            let initialX;
-            let initialY;
-            let xOffset = 0;
-            let yOffset = 0;
-
-            sticker.addEventListener("touchstart", dragStart, false);
-            sticker.addEventListener("touchend", dragEnd, false);
-            sticker.addEventListener("touchmove", drag, false);
-
-            sticker.addEventListener("mousedown", dragStart, false);
-            sticker.addEventListener("mouseup", dragEnd, false);
-            sticker.addEventListener("mouseleave", dragEnd, false);
-            sticker.addEventListener("mousemove", drag, false);
-
-            function dragStart(e) {
-                if (e.type === "touchstart") {
-                    initialX = e.touches[0].clientX - xOffset;
-                    initialY = e.touches[0].clientY - yOffset;
-                } else {
-                    initialX = e.clientX - xOffset;
-                    initialY = e.clientY - yOffset;
-                }
-                active = true;
-                sticker.style.zIndex = "1000";
-            }
-
-            function dragEnd() {
-                initialX = currentX;
-                initialY = currentY;
-                active = false;
-                sticker.style.zIndex = "99";
-            }
-
-            function drag(e) {
-                if (active) {
-                    e.preventDefault();
-                    if (e.type === "touchmove") {
-                        currentX = e.touches[0].clientX - initialX;
-                        currentY = e.touches[0].clientY - initialY;
-                    } else {
-                        currentX = e.clientX - initialX;
-                        currentY = e.clientY - initialY;
-                    }
-
-                    xOffset = currentX;
-                    yOffset = currentY;
-
-                    setTranslate(currentX, currentY, sticker);
-                }
-            }
-
-            function setTranslate(xPos, yPos, el) {
-                el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0px)`;
-            }
-        });
-    </script>
+    <!-- BARRA NEGRA INFERIOR CON ENLACE A REDES SOCIALES -->
+    <footer class="social-footer-bar">
+        <a href="https://www.facebook.com/ComiteOrganizadorFeriadelaNuez" target="_blank" rel="noopener noreferrer" class="social-link">
+            Sigue al Comité Organizador en Facebook
+        </a>
+    </footer>
 
 </body>
 </html>
